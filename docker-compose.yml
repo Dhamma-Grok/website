@@ -1,0 +1,28 @@
+version: '3.10'
+
+services:
+  dhamma_web:
+    build: .
+    container_name: dhamma_web
+    restart: always
+    environment:
+      - HOST=0.0.0.0
+      - PORT=8990
+    ports:
+      - "8990:8990"
+    # depends_on:
+    #   - dhamma_postgres
+    #   - dhamma_mongo
+    volumes:
+      - .:/app
+    networks:
+      - default
+    command: node build
+
+# volumes:
+#   postgres_data:
+#   mongo_data:
+
+networks:
+  default:
+    name: dhamma_app
